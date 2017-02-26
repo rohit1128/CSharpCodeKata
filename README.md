@@ -1,68 +1,46 @@
-##Gilded Rose Refactoring Kata
+# Vitals Code Test
 
-Hi and welcome to team Gilded Rose. As you know, we are a small inn with a 
-prime location in a prominent city ran by a friendly innkeeper named 
-Allison. We also buy and sell only the finest goods. Unfortunately, our 
-goods are constantly degrading in quality as they approach their sell by 
-date. We have a system in place that updates our inventory for us. It was 
-developed by a no-nonsense type named Leeroy, who has moved on to new 
-adventures. Your task is to add the new feature to our system so that we 
-can begin selling a new category of items. First an introduction to our 
-system:
+# Description
+Hi, and welcome to the team! As you know, we provide tools for searching for doctors and hospitals (i.e. "providers") based on various criteria. One type of search that we provide is to find providers that are highly rated by quality.
 
-- All items have a SellIn value which denotes the number of days we have 
-to sell the item
-- All items have a Quality value which denotes how valuable the item is
-- At the end of each day our system lowers both values for every item
+To calculate quality, one measure we use is a score based on professional award recognitions. Each award is factored in slightly differently.
 
-Pretty simple, right? Well this is where it gets interesting:
+- All awards have an ExpiresIn value which denotes the number of days until the award expires.
 
-- Once the sell by date has passed, Quality degrades twice as fast
-- The Quality of an item is never negative
-- "Aged Brie" actually increases in Quality the older it gets
-- The Quality of an item is never more than 50
-- "Sulfuras", being a legendary item, never has to be sold or decreases 
-in Quality
-- "Backstage passes", like aged brie, increases in Quality as it's SellIn 
-value approaches; Quality increases by 2 when there are 10 days or less 
-and by 3 when there are 5 days or less but Quality drops to 0 after the 
-concert
+- All awards have a Quality value which denotes how valuable the award is in our overall calculation.
 
-We have recently signed a supplier of conjured items. This requires an 
-update to our system:
+- At the end of each day our system recalculates both values for every award based on business rules.
 
-- "Conjured" items degrade in Quality twice as fast as normal items
+Pretty basic. But here is where it gets interesting...
 
-Feel free to make any changes to the UpdateQuality method and add any 
-new code as long as everything still works correctly. However, do not 
-alter the Item class or Items property as those belong to the goblin 
-in the corner who will insta-rage and one-shot you as he doesn't 
-believe in shared code ownership (you can make the UpdateQuality 
-method and Items property static if you like, we'll cover for you).
+  - Once the expiration date has passed, quality score degrades twice as fast
 
-Just for clarification, an item can never have its Quality increase 
-above 50, however "Sulfuras" is a legendary item and as such its 
-Quality is 80 and it never alters.
+  - The quality of an award is never negative.
+  
+  - "Blue First" awards actually increase in quality the older they get
 
-##Getting Started
+  - The quality of an award is never more than 50
 
-Clone the repository. Run build.bat from Powershell. If you see 
-output similar to the following screenshot, you are ready to 
-start refactoring.
+  - "Blue Distinction Plus", being a highly sought distinction, never decreases in quality
 
-![alt text](images/build_output.png "Good Build Output")
+  - "Blue Compare", similar to "Blue First", increases in quality as the expiration date approaches; Quality increases by 2 when there are 10 days or less left, and by 3 where there are 5 days or less left, but quality value drops to 0 after the expiration date.
 
-##Who, What, Why?
-Who: [@TerryHughes](https://twitter.com/TerryHughes), [@NotMyself](https://twitter.com/NotMyself)
+  - Just for clarification, an award can never have its quality increase above 50, however "Blue Distinction Plus", being highly sought, its quality is 80 and it never alters.
 
-What & Why: [Refactor This: The Gilded Rose Kata](http://iamnotmyself.com/2011/02/13/refactor-this-the-gilded-rose-kata/)
+We have recently gotten a request from our clients to include an additional award in our quality calculations called "Blue Star". This requires an update to our system.
 
-## License
+# Your Assignment
 
-MIT
+Here is the business story:
 
-## Suggested attribution
+- In order to distinguish between providers of high quality, as a consumer, I want to see "Blue Star" awarded providers near the top of the results when the award is initially granted, but its' impact should be smaller the longer it has been from the grant date.
 
-This work is by [@TerryHughes](https://twitter.com/TerryHughes), [@NotMyself](https://twitter.com/NotMyself)
+- Acceptance Criteria
+  - "Blue Star" awards should lose quality value twice as fast as normal awards.
 
-The repository can be found at [https://github.com/NotMyself/GildedRose](https://github.com/NotMyself/GildedRose)
+If you are familiar with Git (preferred) please fork the code and submit a link to your fork with your changes when you have completed the assignment.  If you are not familiar with Git you may download the source as a zip file and later submit the modified archive.  In all cases you should be able to use the free version of Visual Studio 2015 to make the changes.
+
+The existing code is "legacy", and, ugh, it's ugly. Feel free to make any changes to the code as long as everything still works correctly.
+
+## Installation Hints
+Once loaded in Visual Studio any dependent nuget packages should restore automatically.  You can also run the Build.bat file from the command line to restore packages and build the code.  At the end of the exercise we should be ample confidence in adding the "Blue Star" award to our configuration knowing it will be propery curated when the existing application runs.
